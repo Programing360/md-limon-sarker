@@ -1,59 +1,88 @@
-import React from "react";
-import { NavLink } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Navigate, NavLink } from "react-router";
 
 const Navbar = () => {
+  const [active, setActive] = useState("home");
 
-    const menuItems = <>
-        <ul className="flex gap-5">
-            <li><NavLink>Home</NavLink></li>
-            <li><NavLink>About</NavLink></li>
-            <li><NavLink>Skills</NavLink></li>
-            <li><NavLink>Projects</NavLink></li>
-            <li><NavLink>Contact</NavLink></li>
-        </ul>
-    </>
+  const menuItems = ["home", "about", "skills","services", "projects", "contact"];
+
+  // Smooth scroll function
+  const handleScrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  // Scroll spy (auto active update)
+ useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+    menuItems.forEach((id) => {
+      const section = document.getElementById(id);
+      if (!section) return;
+
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+
+      if (scrollPosition >= top && scrollPosition < bottom) {
+        setActive(id);
+      }
+    });
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   return (
-    <div className="w-full sticky top-0 glass z-10">
+   <div className="w-full sticky top-0 z-50 backdrop-blur-md bg-[#0b132b]/70 border-b border-slate-700">
       <div className="flex h-16 items-center justify-between container mx-auto w-8/12">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              <li>Home</li>
-              <li>About</li>
-              <li>Skills</li>
-              <li>Projects</li>
-              <li>Contact</li>
-            </ul>
-          </div>
-          <a className="text-2xl font-bold text-blue-400">Limon</a>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {menuItems}
-          </ul>
-        </div>
+        
+        {/* Logo */}
+        <a className="text-2xl font-bold text-blue-400">
+          Limon
+        </a>
 
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex gap-8">
+          {menuItems.map((item) => (
+            <li key={item} className="relative">
+              <button
+                onClick={() => handleScrollTo(item)}
+                className={`capitalize text-[16px] transition duration-300 ${
+                  active === item
+                    ? "text-blue-400"
+                    : "text-white"
+                }`}
+              >
+                {item}
+
+                {/* underline animation */}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-blue-400 transition-all duration-300 ${
+                    active === item ? "w-full" : "w-0"
+                  }`}
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile Menu */}
+        <div className="lg:hidden">
+          <select
+            onChange={(e) => handleScrollTo(e.target.value)}
+            className="bg-[#0b132b] text-white p-2 rounded border border-slate-700"
+          >
+            {menuItems.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     </div>
   );

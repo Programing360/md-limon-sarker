@@ -110,7 +110,7 @@ const SkillsData = () => {
     },
   ];
   return (
-    <section className="mt-24 px-4 min-h-screen">
+    <section id="skills" className="mt-24 px-4 min-h-screen flex items-center">
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
         <div className="mb-14">

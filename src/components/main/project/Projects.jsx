@@ -58,7 +58,7 @@ const Projects = () => {
   const tabs = ["all", "frontend", "backend", "mern"];
 
   return (
-    <section className="py-20 text-white">
+    <section id="projects" className="py-20 text-white flex items-center">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">

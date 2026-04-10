@@ -3,7 +3,7 @@ import limonImage from "../../../assets/limon.jpg";
 
 const Banner = () => {
   return (
-    <section className="my-24 px-4 lg:px-0 min-h-screen">
+    <section id="home" className=" px-4 lg:px-0 min-h-screen mx-auto flex items-center">
       <div className="hero rounded-2xl border border-slate-800 bg-linear-to-br from-[#0b1120] via-[#09101f] to-[#111827] px-6 py-12 shadow-lg shadow-blue-900/20 transition-all duration-500 hover:shadow-[0_25px_60px_rgba(59,130,246,0.35)] hover:shadow-blue-500/20 lg:px-12">
         <div className="hero-content flex-col-reverse items-center justify-between gap-10 lg:flex-row">
           
