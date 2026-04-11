@@ -46,6 +46,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Menu */}
+
         <ul className="hidden lg:flex gap-8">
           {menuItems.map((item) => (
             <li key={item} className="relative">
@@ -69,7 +70,6 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-
         {/* Mobile Menu */}
         <div className="lg:hidden">
           <select

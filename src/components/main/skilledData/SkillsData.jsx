@@ -1,8 +1,24 @@
-import { Braces, Code2, CodeXml, Database, GitBranch, ShieldCheck, Wrench } from "lucide-react";
+import {
+  Braces,
+  Code2,
+  CodeXml,
+  Database,
+  GitBranch,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
 import React from "react";
 import { FaCss3Alt, FaNodeJs, FaReact } from "react-icons/fa";
 import { GiThunderBlade } from "react-icons/gi";
-import { SiExpress, SiFirebase, SiHtml5, SiJavascript, SiMongodb, SiOpenai, SiTailwindcss } from "react-icons/si";
+import {
+  SiExpress,
+  SiFirebase,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiOpenai,
+  SiTailwindcss,
+} from "react-icons/si";
 
 const SkillsData = () => {
   const skillsData = [
@@ -110,7 +126,7 @@ const SkillsData = () => {
     },
   ];
   return (
-    <section id="skills" className="mt-24 px-4 min-h-screen flex items-center">
+    <section className="mt-24 px-4 min-h-screen flex items-center">
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
         <div className="mb-14">
@@ -129,6 +145,9 @@ const SkillsData = () => {
           {skillsData.map((category, index) => (
             <div
               key={index}
+              data-aos="fade-up"
+              data-aos-anchor-placement="center-bottom"
+              id="skills"
               className="rounded-[28px] border border-indigo-400/30 bg-[#353985] p-7 shadow-blue-400 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(99,102,241,0.35)]"
             >
               <div className="mb-8 flex items-center gap-3">

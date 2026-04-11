@@ -10,8 +10,8 @@ import {
 
 const About = () => {
   return (
-    <section id="about" className="my-24 px-4 min-h-screen flex items-center">
-      <div className="mx-auto max-w-7xl rounded-2xl border border-blue-500/20 bg-[#050d1f] p-8 shadow-[0_0_40px_rgba(0,191,255,0.25)] transition-all duration-500 hover:shadow-[0_0_60px_rgba(0,191,255,0.4)] md:p-12">
+    <section  id="about" className="my-24 px-4 min-h-screen flex items-center">
+      <div data-aos="fade-up" className="mx-auto max-w-7xl rounded-2xl border border-blue-500/20 bg-[#050d1f] p-8 shadow-[0_0_40px_rgba(0,191,255,0.25)] transition-all duration-500 hover:shadow-[0_0_60px_rgba(0,191,255,0.4)] md:p-12">
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Left Side */}
           <div>

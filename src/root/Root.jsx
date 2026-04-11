@@ -7,6 +7,7 @@ import SkillsData from "../components/main/skilledData/SkillsData";
 import Services from "../components/main/Services/Services";
 import Projects from "../components/main/project/Projects";
 import Contact from "../components/main/contract/Contact";
+import Footer from "../components/main/footer/Footer";
 
 const Root = () => {
   return (
@@ -19,7 +20,9 @@ const Root = () => {
         <Services></Services>
         <Projects></Projects>
         <Contact></Contact>
+        
       </div>
+      <Footer></Footer>
     </div>
   );
 };

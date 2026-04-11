@@ -97,6 +97,8 @@ const Projects = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
+              data-aos="fade-up"
+              data-aos-anchor-placement="center-bottom"
               className="bg-[#111827] border border-gray-800 rounded-2xl overflow-hidden hover:border-[#50a2ff] hover:shadow-blue-500 hover:-translate-y-2 transition-all duration-300 shadow-lg"
             >
               {/* Image */}

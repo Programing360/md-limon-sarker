@@ -13,3 +13,39 @@
   font-style: normal;
   background-color: #01030a;
 }
+.text-rotate {
+  overflow: hidden;
+  height: 70px;
+}
+
+.rotate-wrapper {
+  display: flex;
+  flex-direction: column;
+  animation: rotateText 8s infinite ease-in-out;
+}
+
+.rotate-wrapper span {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+/* text rotate animation */
+@keyframes rotateText {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-70px); }
+  50%, 70% { transform: translateY(-140px); }
+  75%, 95% { transform: translateY(-210px); }
+  100% { transform: translateY(0); }
+}
+
+/* background animation */
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradientMove {
+  animation: gradientMove 10s ease infinite;
+}

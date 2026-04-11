@@ -6,9 +6,9 @@ const Contact = () => {
   return (
     <section id="contact" className="min-h-screen flex items-center justify-center px-4 py-10 ">
       <div className="w-full max-w-7xl border border-slate-700 rounded-[28px] bg-[#020b1f] shadow-2xl px-6 md:px-10 py-10 hover:shadow-md hover:shadow-blue-500 hover:-translate-y-2 transition-all duration-300">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ">
+        <div  className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ">
           {/* Left Side */}
-          <div className="text-white space-y-6">
+          <div data-aos="fade-right" className="text-white space-y-6">
             <div className="flex items-center gap-3">
               <div className="text-[#50a2ff] text-4xl">✈</div>
               <h2 className="text-4xl md:text-5xl font-bold">
@@ -41,7 +41,7 @@ const Contact = () => {
           </div>
 
           {/* Right Side Form */}
-          <div className="inset-0 bg-linear-to-r from-[#1e1b4b] via-[#4338ca] to-[#0f172a] animate-none rounded-[24px] border border-slate-500 p-6 md:p-8 shadow-xl ">
+          <div  data-aos="fade-left" className="inset-0 bg-linear-to-r from-[#1e1b4b] via-[#4338ca] to-[#0f172a] animate-none rounded-[24px] border border-slate-500 p-6 md:p-8 shadow-xl ">
             <form className="space-y-5">
               <div>
                 <input

@@ -87,6 +87,8 @@ const Services = () => {
             {services.map((service, index) => (
               <div
                 key={index}
+                data-aos="fade-up"
+                data-aos-anchor-placement="center-bottom"
                 className="group bg-[#111827] border border-gray-800 rounded-3xl p-8 hover:border-cyan-500 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-blue-400"
               >
                 <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 text-[#50a2ff] flex items-center justify-center mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300">
@@ -117,7 +119,11 @@ const Services = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-16">
+            <div
+              data-aos="fade-up"
+              data-aos-anchor-placement="center-bottom"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-16"
+            >
               {experiences.map((item, index) => (
                 <div
                   key={index}

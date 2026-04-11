@@ -3,28 +3,33 @@ import limonImage from "../../../assets/limon.jpg";
 
 const Banner = () => {
   return (
-    <section id="home" className=" px-4 lg:px-0 min-h-screen mx-auto flex items-center">
-      <div className="hero rounded-2xl border border-slate-800 bg-linear-to-br from-[#0b1120] via-[#09101f] to-[#111827] px-6 py-12 shadow-lg shadow-blue-900/20 transition-all duration-500 hover:shadow-[0_25px_60px_rgba(59,130,246,0.35)] hover:shadow-blue-500/20 lg:px-12">
+    <section
+      id="home"
+      className=" px-4 lg:px-0 min-h-screen mx-auto flex items-center"
+    >
+      <div data-aos="fade-up" className="hero rounded-2xl border border-slate-800 bg-linear-to-br from-[#0b1120] via-[#09101f] to-[#111827] px-6 py-12 shadow-lg shadow-blue-900/20 transition-all duration-500 hover:shadow-[0_25px_60px_rgba(59,130,246,0.35)] hover:shadow-blue-500/20 lg:px-12">
         <div className="hero-content flex-col-reverse items-center justify-between gap-10 lg:flex-row">
-          
           {/* Left Content */}
           <div className="max-w-2xl text-center lg:text-left">
             <p className="mb-3 inline-block rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-sm font-medium tracking-wide text-blue-400">
               Welcome To My Portfolio
             </p>
 
-            <h4 className="text-lg font-medium text-slate-300">
-              Hello, I'm
-            </h4>
+            <h4 className="text-lg font-medium text-slate-300">Hello, I'm</h4>
 
             <h1 className="mt-3 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
               Fardhan Hasan Limon
             </h1>
 
-            <div className="mt-5">
-              <h2 className="text-2xl font-semibold text-blue-400 md:text-3xl">
-                MERN Stack Developer
-              </h2>
+            <div className="">
+              <span className="text-rotate text-2xl">
+                <span className="rotate-wrapper">
+                  <span>UI/UX Designer</span>
+                  <span>Frontend Developer</span>
+                  <span>Backend Developer</span>
+                  <span>MERN Stack Developer</span>
+                </span>
+              </span>
 
               <p className="mt-2 text-base text-slate-400 md:text-lg">
                 Frontend Developer • Backend Developer • UI/UX Enthusiast
