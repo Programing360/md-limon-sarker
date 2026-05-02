@@ -42,8 +42,8 @@ const Footer = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <div className="bg-[#020b1f] pb-30 pt-20 rounded-t-2xl shadow-2xl px-6 md:px-10 py-10shadow-2xl py-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_-10px_30px_rgba(59,130,246,0.5)]">
-      <div className="flex flex-col md:flex-row items-center justify-between container mx-auto w-8/12">
+    <div className="bg-[#020b1f] md:pb-30 md:pt-20 rounded-t-2xl shadow-2xl md:px-10 py-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_-10px_30px_rgba(59,130,246,0.5)]">
+      <div className="flex flex-col md:flex-row items-center justify-between md:container mx-auto md:w-8/12">
         <div className="leading-8">
           <h1 className="text-2xl font-bold text-blue-400">Limon</h1>
           <p className=" text-[16px]">
@@ -52,7 +52,7 @@ const Footer = () => {
           </p>
         </div>
         <div>
-          <ul className="hidden lg:flex gap-8">
+          <ul className="flex md:gap-8 gap-3 py-6 md:p-0">
             {menuItems.map((item) => (
               <li key={item} className="relative">
                 <button
@@ -108,7 +108,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <hr className="container mx-auto w-8/12 mt-8 text-gray-600" />
+      <hr className="container mx-auto md:w-8/12 mt-8 text-gray-600" />
       <p className="text-center pt-10">© 2026 Limon. All rights reserved.</p>
     </div>
   );

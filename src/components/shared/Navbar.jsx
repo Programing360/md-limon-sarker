@@ -1,91 +1,269 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { Navigate, NavLink } from "react-router";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Moon,
+  Sun,
+  Menu,
+  X,
+  Home,
+  User,
+  Code2,
+  Briefcase,
+  FolderKanban,
+  Mail,
+} from "lucide-react";
 
-const Navbar = () => {
+function FHLimonLogo() {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="group relative flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/70 px-3 py-2 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5"
+    >
+      {/* Glow */}
+      <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-blue-500/10 to-indigo-500/20 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 dark:opacity-100" />
+
+      {/* Logo */}
+      <motion.div
+        animate={{
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        style={{
+          backgroundSize: "300% 300%",
+        }}
+        className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 shadow-lg"
+      >
+        <span className="text-lg font-black tracking-tight text-white">
+          FH
+        </span>
+      </motion.div>
+
+      {/* Text */}
+      <div className="hidden sm:flex flex-col">
+        <h1 className="flex items-center gap-2 text-lg font-extrabold tracking-wide text-slate-900 dark:text-white">
+          Limon
+          <motion.span
+            animate={{
+              rotate: [0, 20, -10, 20, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
+            className="inline-block origin-[70%_70%]"
+          >
+            👋
+          </motion.span>
+        </h1>
+
+        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-[10px] font-semibold uppercase tracking-[0.3em] text-transparent">
+          Next.js Developer
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function Navbar() {
   const [active, setActive] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const menuItems = ["home", "about", "skills","services", "projects", "contact"];
+  const menuItems = [
+    { id: "home", icon: Home },
+    { id: "about", icon: User },
+    { id: "skills", icon: Code2 },
+    { id: "services", icon: Briefcase },
+    { id: "projects", icon: FolderKanban },
+    { id: "contact", icon: Mail },
+  ];
 
-  // Smooth scroll function
+  // DARK MODE
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") !== "light";
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode((prev) => !prev);
+  };
+
+  // SMOOTH SCROLL
   const handleScrollTo = (id) => {
+    setMenuOpen(false);
+
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   };
 
-  // Scroll spy (auto active update)
- useEffect(() => {
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY + window.innerHeight / 3;
+  // ACTIVE SECTION
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
 
-    menuItems.forEach((id) => {
-      const section = document.getElementById(id);
-      if (!section) return;
+      menuItems.forEach((item) => {
+        const section = document.getElementById(item.id);
 
-      const top = section.offsetTop;
-      const bottom = top + section.offsetHeight;
+        if (!section) return;
 
-      if (scrollPosition >= top && scrollPosition < bottom) {
-        setActive(id);
-      }
-    });
-  };
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+        if (scrollPosition >= top && scrollPosition < bottom) {
+          setActive(item.id);
+        }
+      });
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-   <div className="w-full sticky top-0 z-50 backdrop-blur-md bg-[#0b132b]/70 border-b border-slate-700">
-      <div className="flex h-16 items-center justify-between container mx-auto w-8/12">
-        
-        {/* Logo */}
-        <a className="text-2xl font-bold text-blue-400">
-          Limon
-        </a>
+    <>
+      {/* NAVBAR */}
+      <motion.nav
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur-2xl dark:border-white/10 dark:bg-[#020817]/70"
+      >
+        <div className="mx-auto flex h-20 w-[92%] max-w-7xl items-center justify-between">
 
-        {/* Desktop Menu */}
+          {/* LEFT */}
+          <FHLimonLogo />
 
-        <ul className="hidden lg:flex gap-8">
-          {menuItems.map((item) => (
-            <li key={item} className="relative">
-              <button
-                onClick={() => handleScrollTo(item)}
-                className={`capitalize text-[16px] transition duration-300 ${
-                  active === item
-                    ? "text-blue-400"
-                    : "text-white"
-                }`}
+          {/* DESKTOP MENU */}
+          <ul className="hidden items-center gap-2 rounded-full border border-slate-200/70 bg-black/[0.03] px-3 py-2 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 lg:flex">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <li key={item.id} className="relative">
+                  <button
+                    onClick={() => handleScrollTo(item.id)}
+                    className={`relative z-10 flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium capitalize transition-all duration-300 ${
+                      active === item.id
+                        ? "text-slate-900 dark:text-white"
+                        : "text-slate-600 hover:text-black dark:text-slate-300 dark:hover:text-white"
+                    }`}
+                  >
+                    {/* ACTIVE BG */}
+                    {active === item.id && (
+                      <motion.div
+                        layoutId="active-pill"
+                        transition={{
+                          type: "spring",
+                          stiffness: 350,
+                          damping: 30,
+                        }}
+                        className="absolute inset-0 -z-10 rounded-full border border-cyan-400/50 bg-cyan-400/10 shadow-[0_0_25px_rgba(34,211,238,0.25)]"
+                      />
+                    )}
+
+                    <Icon className="h-4 w-4" />
+                    {item.id}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* RIGHT */}
+          <div className="flex items-center gap-3">
+
+            {/* THEME BUTTON */}
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={toggleTheme}
+              className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-black shadow-lg transition-all duration-300 hover:shadow-cyan-500/20 dark:border-white/10 dark:bg-white/5 dark:text-white"
+            >
+              <motion.div
+                key={darkMode ? "moon" : "sun"}
+                initial={{ rotate: -180, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                transition={{ duration: 0.4 }}
               >
-                {item}
+                {darkMode ? (
+                  <Moon className="h-5 w-5 text-cyan-400" />
+                ) : (
+                  <Sun className="h-5 w-5 text-yellow-500" />
+                )}
+              </motion.div>
+            </motion.button>
 
-                {/* underline animation */}
-                <span
-                  className={`absolute left-0 -bottom-1 h-[2px] bg-blue-400 transition-all duration-300 ${
-                    active === item ? "w-full" : "w-0"
-                  }`}
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
-        {/* Mobile Menu */}
-        <div className="lg:hidden">
-          <select
-            onChange={(e) => handleScrollTo(e.target.value)}
-            className="bg-[#0b132b] text-white p-2 rounded border border-slate-700"
-          >
-            {menuItems.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+            {/* MOBILE MENU BUTTON */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-black shadow-lg dark:border-white/10 dark:bg-white/5 dark:text-white lg:hidden"
+            >
+              {menuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-  );
-};
+      </motion.nav>
 
-export default Navbar;
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-20 left-1/2 z-40 w-[92%] max-w-md -translate-x-1/2 rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-[#0f172a]/90 lg:hidden"
+          >
+            <div className="flex flex-col gap-2">
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleScrollTo(item.id)}
+                    className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium capitalize transition-all duration-300 ${
+                      active === item.id
+                        ? "border border-cyan-400/40 bg-cyan-400/10 text-cyan-500"
+                        : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/5"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {item.id}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

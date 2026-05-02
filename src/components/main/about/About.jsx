@@ -77,7 +77,7 @@ const About = () => {
                 Tech Stack
               </h3>
               <p className="leading-8 text-slate-400">
-                React, Tailwind CSS, Node.js, Express, MongoDB, Firebase, Git &
+                React, Next.js, Tailwind CSS, Node.js, Express, MongoDB, Firebase, Git &
                 GitHub.
               </p>
             </div>
