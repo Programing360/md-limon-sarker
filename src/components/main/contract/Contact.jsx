@@ -1,87 +1,152 @@
-import React from "react";
-import { useLocation } from "react-router";
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+
+import Lenis from "@studio-freight/lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
-    
+  const sectionRef = useRef(null);
+  const cardRef = useRef(null);
+
+  // ================= LENIS =================
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      smoothWheel: true,
+      smoothTouch: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => lenis.destroy();
+  }, []);
+
+  // ================= AOS =================
+  useEffect(() => {
+    AOS.init({
+      duration: 1200,
+      once: false,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
+  // ================= GSAP =================
+  useEffect(() => {
+    gsap.fromTo(
+      cardRef.current,
+      { y: 100, opacity: 0, scale: 0.95 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      }
+    );
+  }, []);
+
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center px-4 py-10 ">
-      <div className="w-full max-w-7xl border border-slate-700 rounded-[28px] bg-[#020b1f] shadow-2xl px-6 md:px-10 py-10 hover:shadow-md hover:shadow-blue-500 hover:-translate-y-2 transition-all duration-300">
-        <div  className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ">
-          {/* Left Side */}
-          <div data-aos="fade-right" className="text-white space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="text-[#50a2ff] text-4xl">✈</div>
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="relative min-h-screen w-full bg-[#020b1f] px-4 py-24 overflow-hidden"
+    >
+      {/* BACKGROUND GLOW */}
+      <div className="absolute inset-0">
+        <div className="absolute left-[-10%] top-[-10%] h-[400px] w-[400px] rounded-full bg-cyan-500/20 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] h-[400px] w-[400px] rounded-full bg-purple-500/20 blur-[120px]" />
+      </div>
+
+      <div className="mx-auto w-11/12 max-w-7xl">
+
+        {/* MAIN CARD */}
+        <div
+          ref={cardRef}
+          className="relative group rounded-[30px] border border-white/10 bg-white/5 backdrop-blur-2xl p-8 md:p-12 shadow-2xl transition-all duration-500"
+        >
+          {/* HOVER GLOW */}
+          <div className="absolute -inset-1 rounded-[30px] bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+            {/* LEFT */}
+            <div data-aos="fade-right" className="space-y-6 text-white">
               <h2 className="text-4xl md:text-5xl font-bold">
-                Get In <span className="text-[#50a2ff]">Touch</span>
+                Let’s Build Something <span className="text-cyan-400">Amazing</span>
               </h2>
-            </div>
 
-            <p className="text-slate-400 text-lg leading-8 max-w-xl">
-              I’m currently open to new opportunities, freelance work, and
-              collaborative projects. If you have an idea, a question, or just
-              want to say hello — feel free to reach out.
-            </p>
+              <p className="text-slate-400 leading-8">
+                I’m open for freelance, full-time roles and collaborations.
+                Let’s create something impactful together 🚀
+              </p>
 
-            <div className="space-y-5 pt-4">
-              <div className="flex items-center gap-4 text-slate-300 text-lg">
-                <span className="w-3 h-3 rounded-full bg-[#50a2ff]"></span>
-                <span>Open to full-time & freelance roles</span>
-              </div>
-
-              <div className="flex items-center gap-4 text-slate-300 text-lg">
-                <span className="w-3 h-3 rounded-full bg-violet-400"></span>
-                <span>Quick response via email</span>
-              </div>
-
-              <div className="flex items-center gap-4 text-slate-300 text-lg">
-                <span className="w-3 h-3 rounded-full bg-indigo-500"></span>
-                <span>Passionate about clean, scalable code</span>
+              <div className="space-y-3 text-slate-300">
+                <p>✔ Clean & scalable code</p>
+                <p>✔ Fast response</p>
+                <p>✔ Modern UI/UX design</p>
               </div>
             </div>
-          </div>
 
-          {/* Right Side Form */}
-          <div  data-aos="fade-left" className="inset-0 bg-linear-to-r from-[#1e1b4b] via-[#4338ca] to-[#0f172a] animate-none rounded-[24px] border border-slate-500 p-6 md:p-8 shadow-xl ">
-            <form className="space-y-5">
-              <div>
+            {/* RIGHT FORM */}
+            <div
+              data-aos="fade-left"
+              className="rounded-2xl border border-white/10 bg-[#0b132b]/60 p-6 md:p-8 backdrop-blur-xl"
+            >
+              <form className="space-y-4">
+
                 <input
-                  type="text"
                   placeholder="Your Name"
-                  className="w-full bg-[#0b132b] border border-slate-700 rounded-xl px-5 py-4 text-white placeholder:text-slate-400 outline-none focus:border-[#50a2ff] transition"
+                  className="w-full rounded-xl bg-black/30 border border-white/10 px-5 py-4 text-white outline-none focus:border-cyan-400"
                 />
-              </div>
 
-              <div>
                 <input
-                  type="email"
                   placeholder="Your Email"
-                  className="w-full bg-[#0b132b] border border-slate-700 rounded-xl px-5 py-4 text-white placeholder:text-slate-400 outline-none focus:border-[#50a2ff] transition"
+                  className="w-full rounded-xl bg-black/30 border border-white/10 px-5 py-4 text-white outline-none focus:border-cyan-400"
                 />
-              </div>
 
-              <div>
-                <input
-                  type="text"
-                  placeholder="Subject"
-                  className="w-full bg-[#0b132b] border border-slate-700 rounded-xl px-5 py-4 text-white placeholder:text-slate-400 outline-none focus:border-[#50a2ff] transition"
-                />
-              </div>
-
-              <div>
                 <textarea
-                  rows="6"
+                  rows="5"
                   placeholder="Your Message"
-                  className="w-full bg-[#0b132b] border border-slate-700 rounded-xl px-5 py-4 text-white placeholder:text-slate-400 outline-none focus:border-[#50a2ff] transition resize-none"
-                ></textarea>
-              </div>
+                  className="w-full rounded-xl bg-black/30 border border-white/10 px-5 py-4 text-white outline-none focus:border-cyan-400 resize-none"
+                />
 
-              <button
-                type="submit"
-                className="w-full py-4 rounded-xl font-bold text-black text-lg bg-gradient-to-r from-[#50a2ff] via-blue-400 to-purple-500 hover:scale-[1.02] transition duration-300 shadow-lg"
-              >
-                Send Message
-              </button>
-            </form>
+                {/* MAGNETIC BUTTON */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative w-full overflow-hidden rounded-xl py-4 font-bold text-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-lg"
+                >
+                  Send Message
+                </motion.button>
+
+              </form>
+            </div>
+
           </div>
         </div>
       </div>

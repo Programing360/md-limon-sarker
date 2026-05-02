@@ -1,7 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Lenis from "@studio-freight/lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import {
   Moon,
   Sun,
@@ -15,11 +19,13 @@ import {
   Mail,
 } from "lucide-react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 function FHLimonLogo() {
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="group relative flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/70 px-3 py-2 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5"
+      whileHover={{ scale: 1.03 }}
+      className="group relative flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/70 px-3 py-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
     >
       {/* Glow */}
       <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-blue-500/10 to-indigo-500/20 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 dark:opacity-100" />
@@ -37,21 +43,17 @@ function FHLimonLogo() {
         style={{
           backgroundSize: "300% 300%",
         }}
-        className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 shadow-lg"
+        className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 shadow-lg"
       >
-        <span className="text-lg font-black tracking-tight text-white">
-          FH
-        </span>
+        <span className="text-lg font-black text-white">FH</span>
       </motion.div>
 
       {/* Text */}
       <div className="hidden sm:flex flex-col">
-        <h1 className="flex items-center gap-2 text-lg font-extrabold tracking-wide text-slate-900 dark:text-white">
+        <h1 className="flex items-center gap-2 text-lg font-extrabold text-slate-900 dark:text-white">
           Limon
           <motion.span
-            animate={{
-              rotate: [0, 20, -10, 20, 0],
-            }}
+            animate={{ rotate: [0, 20, -10, 20, 0] }}
             transition={{
               duration: 1.5,
               repeat: Infinity,
@@ -75,6 +77,8 @@ export default function Navbar() {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const navRef = useRef(null);
+
   const menuItems = [
     { id: "home", icon: Home },
     { id: "about", icon: User },
@@ -84,7 +88,10 @@ export default function Navbar() {
     { id: "contact", icon: Mail },
   ];
 
+  // =========================
   // DARK MODE
+  // =========================
+
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("theme") !== "light";
@@ -102,53 +109,105 @@ export default function Navbar() {
     }
   }, [darkMode]);
 
-  const toggleTheme = () => {
-    setDarkMode((prev) => !prev);
-  };
+  // =========================
+  // LENIS SMOOTH SCROLL
+  // =========================
 
-  // SMOOTH SCROLL
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      smoothWheel: true,
+      smoothTouch: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // =========================
+  // GSAP NAVBAR ANIMATION
+  // =========================
+
+  useEffect(() => {
+    gsap.fromTo(
+      navRef.current,
+      {
+        y: -100,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power4.out",
+      }
+    );
+  }, []);
+
+  // =========================
+  // ACTIVE SECTION
+  // =========================
+
+  useEffect(() => {
+    const sections = menuItems.map((item) =>
+      document.getElementById(item.id)
+    );
+
+    sections.forEach((section) => {
+      if (!section) return;
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top center",
+        end: "bottom center",
+
+        onEnter: () => setActive(section.id),
+        onEnterBack: () => setActive(section.id),
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  // =========================
+  // SCROLL TO SECTION
+  // =========================
+
   const handleScrollTo = (id) => {
     setMenuOpen(false);
 
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+    const section = document.getElementById(id);
 
-  // ACTIVE SECTION
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      menuItems.forEach((item) => {
-        const section = document.getElementById(item.id);
-
-        if (!section) return;
-
-        const top = section.offsetTop;
-        const bottom = top + section.offsetHeight;
-
-        if (scrollPosition >= top && scrollPosition < bottom) {
-          setActive(item.id);
-        }
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
       });
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    }
+  };
 
   return (
     <>
       {/* NAVBAR */}
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+      <nav
+        ref={navRef}
         className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur-2xl dark:border-white/10 dark:bg-[#020817]/70"
       >
         <div className="mx-auto flex h-20 w-[92%] max-w-7xl items-center justify-between">
@@ -171,7 +230,6 @@ export default function Navbar() {
                         : "text-slate-600 hover:text-black dark:text-slate-300 dark:hover:text-white"
                     }`}
                   >
-                    {/* ACTIVE BG */}
                     {active === item.id && (
                       <motion.div
                         layoutId="active-pill"
@@ -180,7 +238,7 @@ export default function Navbar() {
                           stiffness: 350,
                           damping: 30,
                         }}
-                        className="absolute inset-0 -z-10 rounded-full border border-cyan-400/50 bg-cyan-400/10 shadow-[0_0_25px_rgba(34,211,238,0.25)]"
+                        className="absolute inset-0 -z-10 rounded-full border border-cyan-400/40 bg-cyan-400/10 shadow-[0_0_25px_rgba(34,211,238,0.25)]"
                       />
                     )}
 
@@ -195,51 +253,54 @@ export default function Navbar() {
           {/* RIGHT */}
           <div className="flex items-center gap-3">
 
-            {/* THEME BUTTON */}
+            {/* THEME TOGGLE */}
             <motion.button
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.05 }}
-              onClick={toggleTheme}
-              className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-black shadow-lg transition-all duration-300 hover:shadow-cyan-500/20 dark:border-white/10 dark:bg-white/5 dark:text-white"
+              onClick={() => setDarkMode(!darkMode)}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg dark:border-white/10 dark:bg-white/5"
             >
-              <motion.div
-                key={darkMode ? "moon" : "sun"}
-                initial={{ rotate: -180, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              >
-                {darkMode ? (
-                  <Moon className="h-5 w-5 text-cyan-400" />
-                ) : (
-                  <Sun className="h-5 w-5 text-yellow-500" />
-                )}
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={darkMode ? "moon" : "sun"}
+                  initial={{ rotate: -180, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 180, opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {darkMode ? (
+                    <Moon className="h-5 w-5 text-cyan-400" />
+                  ) : (
+                    <Sun className="h-5 w-5 text-yellow-500" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </motion.button>
 
             {/* MOBILE MENU BUTTON */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-black shadow-lg dark:border-white/10 dark:bg-white/5 dark:text-white lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg dark:border-white/10 dark:bg-white/5 lg:hidden"
             >
               {menuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5 text-black dark:text-white" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5 text-black dark:text-white" />
               )}
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* MOBILE MENU */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-20 left-1/2 z-40 w-[92%] max-w-md -translate-x-1/2 rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-[#0f172a]/90 lg:hidden"
+            className="fixed left-1/2 top-20 z-40 w-[92%] max-w-md -translate-x-1/2 rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-[#0f172a]/90 lg:hidden"
           >
             <div className="flex flex-col gap-2">
               {menuItems.map((item) => {

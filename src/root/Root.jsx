@@ -10,20 +10,23 @@ import Contact from "../components/main/contract/Contact";
 import Footer from "../components/main/footer/Footer";
 import { Banner } from "../components/main/banner/Banner";
 import Education from "../components/main/Education/Education";
+import ScrollToTop from "../components/ScrollToTop/ScrollToTop ";
+import ContactInfo from "../components/main/contract/ContactInfo";
 
 const Root = () => {
   return (
     <div className="">
+      <ScrollToTop></ScrollToTop>
       <Navbar></Navbar>
+      <Banner></Banner>
       <div className="md:container mx-auto md:w-8/12">
-        <Banner></Banner>
         <About></About>
         <SkillsData></SkillsData>
         <Education></Education>
         <Services></Services>
         <Projects></Projects>
+        <ContactInfo></ContactInfo>
         <Contact></Contact>
-        
       </div>
       <Footer></Footer>
     </div>
