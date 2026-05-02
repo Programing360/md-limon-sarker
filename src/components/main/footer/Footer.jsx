@@ -79,28 +79,32 @@ const Footer = () => {
           <div className="flex gap-4">
             {/* Icon */}
             <a
-              href="#"
+              href="https://github.com/Programing360"
+              target="_black"
               className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0b132b] hover:bg-blue-500 transition duration-300"
             >
               <FaGithub />
             </a>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/in/fardhan-hasan-limon/"
+              target="_black"
               className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0b132b] hover:bg-blue-500 transition duration-300"
             >
               <FaLinkedin />
             </a>
 
             <a
-              href="#"
+              href="https://www.facebook.com/md.limon.280500"
+              target="_black"
               className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0b132b] hover:bg-blue-500 transition duration-300"
             >
               <FaFacebook />
             </a>
 
             <a
-              href="#"
+              href="mailto:fardhanhasanlimon95@gmail.com"
+              target="_black"
               className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0b132b] hover:bg-blue-500 transition duration-300"
             >
               <FaEnvelope />

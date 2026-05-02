@@ -12,10 +12,12 @@ import { Banner } from "../components/main/banner/Banner";
 import Education from "../components/main/Education/Education";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop ";
 import ContactInfo from "../components/main/contract/ContactInfo";
+import ClickEffect from "../components/ClickEffect/ClickEffect";
 
 const Root = () => {
   return (
     <div className="">
+      {/* <ClickEffect></ClickEffect> */}
       <ScrollToTop></ScrollToTop>
       <Navbar></Navbar>
       <Banner></Banner>
