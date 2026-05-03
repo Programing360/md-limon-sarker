@@ -74,7 +74,7 @@ const Services = () => {
               My Services
             </p>
             <h1 className="text-4xl md:text-5xl font-bold mt-4 leading-tight">
-              Professional Solutions For Your Business
+              Professional Solutions For Your <span className="text-cyan-400">Business</span>
             </h1>
             <p className="text-gray-400 mt-5 text-base md:text-lg">
               I provide modern web development services focused on creating

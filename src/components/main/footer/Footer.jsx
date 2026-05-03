@@ -42,7 +42,7 @@ const Footer = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <div className="bg-[#020b1f] md:pb-30 md:pt-20 rounded-t-2xl shadow-2xl md:px-10 py-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_-10px_30px_rgba(59,130,246,0.5)]">
+    <div className="bg-[#020b1f] md:pb-30 md:pt-20 rounded-t-2xl shadow-2xl md:px-10 py-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_-10px_30px_rgba(59,130,246,0.5)] text-white">
       <div className="flex flex-col md:flex-row items-center justify-between md:container mx-auto md:w-8/12">
         <div className="leading-8">
           <h1 className="text-2xl font-bold text-blue-400">Limon</h1>

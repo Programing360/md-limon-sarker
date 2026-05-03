@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Education = () => {
   return (
-    <section className="w-full py-16 px-4 md:px-10 bg-white dark:bg-gray-900">
+    <section className="w-full py-16 px-4 md:px-10 bg-gray-900">
       <div className="max-w-5xl mx-auto">
 
         {/* Title */}
@@ -13,9 +13,9 @@ const Education = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-white mb-14"
+          className="text-3xl md:text-4xl font-bold text-center text-white mb-14"
         >
-          Educational Qualification
+          Educational <span className="text-cyan-400">Qualification</span>
         </motion.h2>
 
         {/* Timeline Container */}

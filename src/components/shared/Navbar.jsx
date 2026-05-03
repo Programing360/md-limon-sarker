@@ -208,7 +208,7 @@ export default function Navbar() {
       {/* NAVBAR */}
       <nav
         ref={navRef}
-        className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur-2xl dark:border-white/10 dark:bg-[#020817]/70"
+        className="sticky top-0 z-50 border-b border-slate-200/70  backdrop-blur-2xl bg-[#020817]/70"
       >
         <div className="mx-auto flex h-20 w-[92%] max-w-7xl items-center justify-between">
 
@@ -216,7 +216,7 @@ export default function Navbar() {
           <FHLimonLogo />
 
           {/* DESKTOP MENU */}
-          <ul className="hidden items-center gap-2 rounded-full border border-slate-200/70 bg-black/[0.03] px-3 py-2 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 lg:flex">
+          <ul className="hidden items-center gap-2 rounded-full border  px-3 py-2 backdrop-blur-xl border-white/10 bg-white/5 lg:flex">
             {menuItems.map((item) => {
               const Icon = item.icon;
 
@@ -226,8 +226,8 @@ export default function Navbar() {
                     onClick={() => handleScrollTo(item.id)}
                     className={`relative z-10 flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium capitalize transition-all duration-300 ${
                       active === item.id
-                        ? "text-slate-900 dark:text-white"
-                        : "text-slate-600 hover:text-black dark:text-slate-300 dark:hover:text-white"
+                        ? "text-white"
+                        : "hover:text-black text-slate-300 dark:hover:text-white"
                     }`}
                   >
                     {active === item.id && (

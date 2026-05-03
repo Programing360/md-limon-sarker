@@ -22,10 +22,10 @@ const projects = [
   {
     id: "gdocs",
     image: "https://i.ibb.co/9HnPRG9G/Dashboard.png",
-    title: "Keen Keeper",
+    title: "Keen Keeper Platform",
     desc: "A friendship management platform where users can manage close friends, authentication, profile systems, and modern responsive UI.",
     tags: ["React", "Firebase", "Tailwind", "Better Auth"],
-    github: "#",
+    github: "https://github.com/Programing360/keen-keeper-projects",
     demo: "https://keen-keeper-projects.vercel.app/",
     accent: "#10b981",
   },
@@ -37,8 +37,8 @@ const projects = [
     title: "Zeroomiro E-Commerce",
     desc: "A fully responsive e-commerce platform with cart system, authentication, dynamic products, secure checkout flow, and modern UI.",
     tags: ["React", "Firebase", "Node.js", "Tailwind"],
-    github: "#",
-    demo: "#",
+    github: "https://github.com/Programing360/gadget-e-commerce-project",
+    demo: "https://zeroomiro26.web.app/",
     accent: "#8b5cf6",
   },
 ];

@@ -125,7 +125,7 @@ export function Banner() {
     <section
       ref={bannerRef}
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-white px-4 dark:bg-[#020817] lg:px-0"
+      className="relative flex min-h-screen items-center overflow-hidden  px-4 bg-[#020817] lg:px-0"
     >
       {/* BACKGROUND EFFECTS */}
 
@@ -175,7 +175,7 @@ export function Banner() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-5 flex flex-wrap items-center justify-center gap-3 text-4xl font-black leading-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl lg:justify-start lg:text-7xl"
+            className="mt-5 flex flex-wrap items-center justify-center gap-3 text-4xl font-black leading-tight  text-white sm:text-5xl md:text-6xl lg:justify-start lg:text-7xl"
           >
             Fardhan Hasan Limon
 
@@ -249,7 +249,7 @@ export function Banner() {
             ].map((item) => (
               <div
                 key={item}
-                className="rounded-full border border-slate-300/20 bg-white/5 px-5 py-2 text-sm font-medium text-slate-700 backdrop-blur-xl dark:text-slate-300"
+                className="rounded-full border border-slate-300/20 bg-white/5 px-5 py-2 text-sm font-medium text-slate-700 backdrop-blur-xl dark:text-slate-300 hover:text-cyan-400 transition-all duration-500"
               >
                 {item}
               </div>
