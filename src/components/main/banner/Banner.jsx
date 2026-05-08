@@ -9,9 +9,18 @@ import Lenis from "@studio-freight/lenis";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import {
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+} from "react-icons/fa";
+
+import {
+  ArrowRight,
+  Download,
+} from "lucide-react";
+
 import limonImage from "../../../assets/limon.jpg";
-import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
-import { ArrowRight, Download } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,13 +30,13 @@ export function Banner() {
   const titleRef = useRef(null);
 
   // =========================
-  // LENIS SMOOTH SCROLL
+  // LENIS
   // =========================
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
-      smoothTouch: false,
     });
 
     function raf(time) {
@@ -51,8 +60,9 @@ export function Banner() {
   }, []);
 
   // =========================
-  // AOS INIT
+  // AOS
   // =========================
+
   useEffect(() => {
     AOS.init({
       duration: 1200,
@@ -62,8 +72,9 @@ export function Banner() {
   }, []);
 
   // =========================
-  // GSAP ANIMATION
+  // GSAP
   // =========================
+
   useEffect(() => {
     const tl = gsap.timeline();
 
@@ -97,7 +108,6 @@ export function Banner() {
       }
     );
 
-    // PARALLAX EFFECT
     gsap.to(imageRef.current, {
       yPercent: -10,
       ease: "none",
@@ -112,8 +122,9 @@ export function Banner() {
   }, []);
 
   // =========================
-  // SMOOTH SCROLL
+  // SCROLL
   // =========================
+
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
@@ -125,11 +136,12 @@ export function Banner() {
     <section
       ref={bannerRef}
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden  px-4 bg-[#020817] lg:px-0"
+      className="relative flex min-h-screen items-center overflow-hidden bg-[#020817] px-4 lg:px-0"
     >
-      {/* BACKGROUND EFFECTS */}
+      {/* BACKGROUND */}
 
       <div className="absolute inset-0 overflow-hidden">
+
         {/* TOP LIGHT */}
         <div className="absolute left-[-10%] top-[-10%] h-[400px] w-full rounded-full bg-cyan-500/20 blur-[120px]" />
 
@@ -138,6 +150,7 @@ export function Banner() {
 
         {/* GRID */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
       </div>
 
       <div className="container relative z-10 mx-auto flex w-[92%] max-w-7xl flex-col items-center justify-between gap-16 py-20 lg:flex-row">
@@ -150,7 +163,9 @@ export function Banner() {
           ref={titleRef}
           className="max-w-3xl text-center lg:text-left"
         >
+
           {/* BADGE */}
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -161,21 +176,23 @@ export function Banner() {
           </motion.div>
 
           {/* SMALL TEXT */}
+
           <motion.h4
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-lg font-medium text-slate-500 dark:text-slate-400"
+            className="text-lg font-medium text-slate-400"
           >
             Hey, I'm
           </motion.h4>
 
           {/* TITLE */}
+
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-5 flex flex-wrap items-center justify-center gap-3 text-4xl font-black leading-tight  text-white sm:text-5xl md:text-6xl lg:justify-start lg:text-7xl"
+            className="mt-5 flex flex-wrap items-center justify-center gap-3 text-4xl font-black leading-tight text-white sm:text-5xl md:text-6xl lg:justify-start lg:text-7xl"
           >
             Fardhan Hasan Limon
 
@@ -195,12 +212,13 @@ export function Banner() {
           </motion.h1>
 
           {/* ROTATING TEXT */}
+
           <div
             data-aos="fade-up"
             data-aos-delay="300"
             className="mt-5 flex flex-wrap items-center justify-center gap-3 text-lg lg:justify-start"
           >
-            <span className="font-medium text-slate-700 dark:text-slate-300">
+            <span className="font-medium text-slate-300">
               I am a
             </span>
 
@@ -236,6 +254,7 @@ export function Banner() {
           </div>
 
           {/* SKILLS */}
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -249,7 +268,7 @@ export function Banner() {
             ].map((item) => (
               <div
                 key={item}
-                className="rounded-full border border-slate-300/20 bg-white/5 px-5 py-2 text-sm font-medium text-slate-700 backdrop-blur-xl dark:text-slate-300 hover:text-cyan-400 transition-all duration-500"
+                className="rounded-full border border-slate-300/20 bg-white/5 px-5 py-2 text-sm font-medium text-slate-300 backdrop-blur-xl transition-all duration-500 hover:text-cyan-400"
               >
                 {item}
               </div>
@@ -257,25 +276,31 @@ export function Banner() {
           </motion.div>
 
           {/* DESCRIPTION */}
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="mt-8 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg"
+            className="mt-8 max-w-2xl text-base leading-8 text-slate-400 md:text-lg"
           >
-            I design and develop modern, scalable, high-performance web
-            applications with clean UI, smooth user experience, advanced
-            animations, and secure backend architecture.
+            I design and develop modern, scalable,
+            high-performance web applications with
+            clean UI, smooth user experience,
+            advanced animations, and secure backend
+            architecture.
           </motion.p>
 
           {/* BUTTONS */}
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
             className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start"
           >
+
             {/* HIRE BUTTON */}
+
             <button
               onClick={() => scrollToSection("contact")}
               className="group flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/40"
@@ -286,14 +311,17 @@ export function Banner() {
             </button>
 
             {/* RESUME */}
-            <button className="group flex items-center justify-center gap-2 rounded-2xl border border-slate-300/20 bg-white/5 px-8 py-4 font-semibold text-slate-700 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:text-cyan-400 dark:text-slate-300">
+
+            <button className="group flex items-center justify-center gap-2 rounded-2xl border border-slate-300/20 bg-white/5 px-8 py-4 font-semibold text-slate-300 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:text-cyan-400">
               Download Resume
 
               <Download className="h-5 w-5" />
             </button>
+
           </motion.div>
 
           {/* SOCIAL */}
+
           <div className="mt-10 flex items-center justify-center gap-4 lg:justify-start">
             {[FaGithub, FaLinkedin, FaFacebook].map((Icon, i) => (
               <motion.button
@@ -305,12 +333,13 @@ export function Banner() {
                 whileTap={{
                   scale: 0.9,
                 }}
-                className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-300/20 bg-white/5 text-slate-700 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/40 hover:text-cyan-400 dark:text-slate-300"
+                className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-300/20 bg-white/5 text-slate-300 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/40 hover:text-cyan-400"
               >
                 <Icon className="h-5 w-5" />
               </motion.button>
             ))}
           </div>
+
         </div>
 
         {/* ========================= */}
@@ -319,12 +348,18 @@ export function Banner() {
 
         <motion.div
           ref={imageRef}
-          initial={{ opacity: 0, x: 0 }}
+          initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           className="relative flex items-center justify-center"
         >
+
+          {/* MAIN GLOW */}
+
+          <div className="absolute h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[120px]" />
+
           {/* ROTATING CIRCLE */}
+
           <motion.div
             animate={{
               rotate: 360,
@@ -334,13 +369,55 @@ export function Banner() {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute h-[320px] w-[320px] rounded-full border border-cyan-400/20 border-dashed sm:h-[380px] sm:w-[380px] lg:h-[520px] lg:w-[520px]"
+            className="absolute h-[520px] w-[520px] rounded-full border border-cyan-400/20 border-dashed"
           />
 
-          {/* SECOND GLOW */}
-          <div className="absolute h-[350px] w-[350px] rounded-full bg-cyan-500/10 blur-[100px] lg:h-[500px] lg:w-[500px]" />
+          {/* FLOATING CARD 1 */}
 
-          {/* IMAGE CARD */}
+          <motion.div
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -left-20 top-16 hidden lg:block"
+          >
+            <div className="w-[220px] rotate-[-12deg] rounded-3xl border border-white/10 bg-white/5 p-3 backdrop-blur-xl shadow-2xl">
+              <img
+                src="https://i.ibb.co.com/8L5M6Y8/dashboard.jpg"
+                alt=""
+                className="rounded-2xl"
+              />
+            </div>
+          </motion.div>
+
+          {/* FLOATING CARD 2 */}
+
+          <motion.div
+            animate={{
+              y: [0, 15, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -right-20 bottom-16 hidden lg:block"
+          >
+            <div className="w-[220px] rotate-[12deg] rounded-3xl border border-white/10 bg-white/5 p-3 backdrop-blur-xl shadow-2xl">
+              <img
+                src="https://i.ibb.co.com/0Jmshvb/portfolio.jpg"
+                alt=""
+                className="rounded-2xl"
+              />
+            </div>
+          </motion.div>
+
+          {/* MAIN IMAGE */}
+
           <motion.div
             animate={{
               y: [0, -20, 0],
@@ -352,18 +429,53 @@ export function Banner() {
             }}
             className="group relative"
           >
+
+            {/* GRADIENT BORDER */}
+
+            <div className="absolute -inset-[3px] rounded-[40px] bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 opacity-70 blur-sm transition duration-500 group-hover:opacity-100" />
+
             <img
               src={limonImage}
               alt="Fardhan Hasan Limon"
-              className="relative z-10 h-[420px] w-[300px] rounded-[40px] border border-white/10 object-cover shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:grayscale-0 sm:h-[500px] sm:w-[360px] lg:h-[620px] lg:w-[430px]"
+              className="relative z-10 h-[420px] w-[300px] rounded-[40px] border border-white/10 object-cover shadow-2xl transition-all duration-700 group-hover:scale-[1.02] sm:h-[500px] sm:w-[360px] lg:h-[620px] lg:w-[430px]"
             />
 
-            {/* GLASS OVERLAY */}
-            <div className="absolute inset-0 rounded-[40px] bg-gradient-to-t from-black/20 to-transparent" />
+            {/* OVERLAY */}
 
-            {/* BORDER */}
-            <div className="absolute inset-0 rounded-[40px] border border-white/10" />
+            <div className="absolute inset-0 rounded-[40px] bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
           </motion.div>
+
+          {/* FLOATING BADGE */}
+
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+            }}
+            className="absolute left-0 top-7 hidden rounded-2xl border border-white/10 bg-white/10 px-5 py-2 backdrop-blur-xl lg:flex items-center"
+          >
+            <span><img className="w-10" src="https://skillicons.dev/icons?i=nextjs" alt="" /></span> <span>Next.js Developer</span>
+          </motion.div>
+
+          {/* FLOATING BADGE */}
+
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+            }}
+            className="absolute bottom-10 right-0 hidden rounded-2xl border border-white/10 bg-white/10 px-5 py-3 backdrop-blur-xl lg:flex"
+          >
+            🚀 MERN Stack
+          </motion.div>
+
         </motion.div>
       </div>
     </section>

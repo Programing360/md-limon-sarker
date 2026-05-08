@@ -10,18 +10,18 @@ import { FiGithub, FiExternalLink } from "react-icons/fi";
 const projects = [
   {
     id: "gamehub",
-    image: "https://i.ibb.co.com/fYDB3Bh4/Chat-GPT-Image-Apr-30-2026-02-01-29-PM.png",
+    image: "https://i.ibb.co.com/LXCyQWnG/design-professional.avif",
     title: "Online Book Borrowing Platform",
     desc: "A modern library management platform with authentication, borrowing system, admin dashboard, protected routes, and responsive UI built using Next.js and MongoDB.",
     tags: ["Next.js", "Node.js", "MongoDB", "Tailwind"],
     github: "https://github.com/Programing360/online-book-borrowing",
-    demo: "#",
+    demo: "https://online-book-borrowing-delta.vercel.app",
     accent: "#3b82f6",
   },
 
   {
-    id: "gdocs",
-    image: "https://i.ibb.co/9HnPRG9G/Dashboard.png",
+    id: "keen",
+    image: "https://i.ibb.co.com/zW2B6GjT/design-professional-website-layout-company-specializing-gold-cryptocurrency-trading-1269188-5041.avif",
     title: "Keen Keeper Platform",
     desc: "A friendship management platform where users can manage close friends, authentication, profile systems, and modern responsive UI.",
     tags: ["React", "Firebase", "Tailwind", "Better Auth"],
@@ -33,7 +33,7 @@ const projects = [
   {
     id: "zeroomiro",
     image:
-      "https://i.ibb.co.com/7xXd57Fp/Screenshot-2026-05-02-153945.png",
+      "https://i.ibb.co.com/sv4fZDt4/banner-Mck-Up.png",
     title: "Zeroomiro E-Commerce",
     desc: "A fully responsive e-commerce platform with cart system, authentication, dynamic products, secure checkout flow, and modern UI.",
     tags: ["React", "Firebase", "Node.js", "Tailwind"],
