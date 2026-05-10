@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import React, { useEffect, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import {
   Moon,
   Sun,
@@ -17,314 +18,205 @@ import {
   Briefcase,
   FolderKanban,
   Mail,
+  ArrowRight,
 } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
-
-function FHLimonLogo() {
-  return (
-    <motion.div
-      whileHover={{ scale: 1.03 }}
-      className="group relative flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/70 px-3 py-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
-    >
-      {/* Glow */}
-      <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-blue-500/10 to-indigo-500/20 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 dark:opacity-100" />
-
-      {/* Logo */}
-      <motion.div
-        animate={{
-          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        style={{
-          backgroundSize: "300% 300%",
-        }}
-        className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 shadow-lg"
-      >
-        <span className="text-lg font-black text-white">FH</span>
-      </motion.div>
-
-      {/* Text */}
-      <div className="hidden sm:flex flex-col">
-        <h1 className="flex items-center gap-2 text-lg font-extrabold text-slate-900 dark:text-white">
-          Limon
-          <motion.span
-            animate={{ rotate: [0, 20, -10, 20, 0] }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
-            className="inline-block origin-[70%_70%]"
-          >
-            👋
-          </motion.span>
-        </h1>
-
-        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-[10px] font-semibold uppercase tracking-[0.3em] text-transparent">
-          Next.js Developer
-        </p>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
-  const navRef = useRef(null);
+  // Scroll logic: change active state based on section visibility
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 50);
 
-  const menuItems = [
-    { id: "home", icon: Home },
-    { id: "about", icon: User },
-    { id: "skills", icon: Code2 },
-    { id: "services", icon: Briefcase },
-    { id: "projects", icon: FolderKanban },
-    { id: "contact", icon: Mail },
-  ];
-
-  // =========================
-  // DARK MODE
-  // =========================
-
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") !== "light";
+    const sections = [
+      "home",
+      "about",
+      "skills",
+      "services",
+      "projects",
+      "contact",
+    ];
+    for (const section of sections) {
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        // Section center point logic for more accuracy
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActive(section);
+        }
+      }
     }
-    return true;
   });
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
-  // =========================
-  // LENIS SMOOTH SCROLL
-  // =========================
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      smoothWheel: true,
-      smoothTouch: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    lenis.on("scroll", ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  // =========================
-  // GSAP NAVBAR ANIMATION
-  // =========================
-
-  useEffect(() => {
-    gsap.fromTo(
-      navRef.current,
-      {
-        y: -100,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power4.out",
-      }
-    );
-  }, []);
-
-  // =========================
-  // ACTIVE SECTION
-  // =========================
-
-  useEffect(() => {
-    const sections = menuItems.map((item) =>
-      document.getElementById(item.id)
-    );
-
-    sections.forEach((section) => {
-      if (!section) return;
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-
-        onEnter: () => setActive(section.id),
-        onEnterBack: () => setActive(section.id),
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
-  // =========================
-  // SCROLL TO SECTION
-  // =========================
+  const menuItems = [
+    { id: "home", label: "Home", icon: Home },
+    { id: "about", label: "About", icon: User },
+    { id: "skills", label: "Skills", icon: Code2 },
+    { id: "services", label: "Services", icon: Briefcase },
+    { id: "projects", label: "Projects", icon: FolderKanban },
+    { id: "contact", label: "Contact", icon: Mail },
+  ];
 
   const handleScrollTo = (id) => {
+    setActive(id);
     setMenuOpen(false);
-
-    const section = document.getElementById(id);
-
-    if (section) {
-      section.scrollIntoView({
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
         behavior: "smooth",
       });
     }
   };
 
   return (
-    <>
-      {/* NAVBAR */}
-      <nav
-        ref={navRef}
-        className="sticky top-0 z-50 border-b border-slate-200/70  backdrop-blur-2xl bg-[#020817]/70"
-      >
-        <div className="mx-auto flex h-20 w-[92%] max-w-7xl items-center justify-between">
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+        scrolled ? "py-3" : "py-6"
+      }`}
+    >
+      <div className="container mx-auto px-6 flex justify-center">
+        {/* Main Navbar Capsule */}
+        <nav
+          className={`relative flex items-center justify-between w-full max-w-5xl px-5 py-2 rounded-full border border-white/10 backdrop-blur-xl transition-all duration-500 ${
+            scrolled
+              ? "bg-slate-900/80 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+              : "bg-white/5"
+          }`}
+        >
+          {/* Logo Section */}
+          <div
+            className="group flex items-center gap-3 cursor-pointer select-none"
+            onClick={() => handleScrollTo("home")}
+          >
+            {/* LOGO BOX WITH NEON GLOW */}
+            <div className="relative">
+              {/* Animated Ring around the logo box */}
+              <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 opacity-30 blur transition duration-500 group-hover:opacity-100 group-hover:duration-200"></div>
 
-          {/* LEFT */}
-          <FHLimonLogo />
+              <div className="relative h-10 w-10 bg-[#0f172a] border border-white/10 rounded-xl flex items-center justify-center overflow-hidden">
+                {/* Background Hover Slide Effect */}
+                <div className="absolute inset-0 translate-y-10 bg-gradient-to-br from-cyan-500 to-blue-600 transition-transform duration-500 ease-out group-hover:translate-y-0"></div>
 
-          {/* DESKTOP MENU */}
-          <ul className="hidden items-center gap-2 rounded-full border  px-3 py-2 backdrop-blur-xl border-white/10 bg-white/5 lg:flex">
-            {menuItems.map((item) => {
-              const Icon = item.icon;
+                <span className="relative z-10 font-black text-white text-base tracking-tighter transition-colors duration-300 group-hover:text-white">
+                  FH
+                </span>
+              </div>
+            </div>
 
-              return (
-                <li key={item.id} className="relative">
-                  <button
-                    onClick={() => handleScrollTo(item.id)}
-                    className={`relative z-10 flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium capitalize transition-all duration-300 ${
-                      active === item.id
-                        ? "text-white"
-                        : "hover:text-black text-slate-300 dark:hover:text-white"
-                    }`}
-                  >
-                    {active === item.id && (
-                      <motion.div
-                        layoutId="active-pill"
-                        transition={{
-                          type: "spring",
-                          stiffness: 350,
-                          damping: 30,
-                        }}
-                        className="absolute inset-0 -z-10 rounded-full border border-cyan-400/40 bg-cyan-400/10 shadow-[0_0_25px_rgba(34,211,238,0.25)]"
-                      />
-                    )}
+            {/* TEXT WITH CHARACTER SPACING & GRADIENT */}
+            <div className="flex flex-col justify-start leading-none">
+              <span className="hidden sm:block text-[10px] font-bold text-cyan-400 tracking-[0.3em] uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+                Portfolio
+              </span>
+              <span className="hidden sm:block font-black text-white text-xl tracking-tighter">
+                LIM
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-500 group-hover:from-white group-hover:to-white">
+                  ON
+                </span>
+              </span>
+            </div>
 
-                    <Icon className="h-4 w-4" />
-                    {item.id}
-                  </button>
-                </li>
-              );
-            })}
+            {/* ACTIVE INDICATOR DOT */}
+            <div className="h-1.5 w-1.5 rounded-full bg-cyan-500 animate-pulse hidden md:block shadow-[0_0_10px_#06b6d4]"></div>
+          </div>
+
+          {/* DESKTOP NAV (Magnetic Active Bar) */}
+          <ul className="hidden lg:flex items-center gap-1">
+            {menuItems.map((item) => (
+              <li key={item.id} className="relative">
+                <button
+                  onClick={() => handleScrollTo(item.id)}
+                  className={`relative px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
+                    active === item.id
+                      ? "text-cyan-400"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <span className="relative z-10">{item.label}</span>
+
+                  {/* SMOOTH ACTIVE BAR (The Magic) */}
+                  {active === item.id && (
+                    <motion.div
+                      layoutId="nav-active-bar"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_#22d3ee]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+
+                  {/* HOVER GLOW EFFECT */}
+                  {active === item.id && (
+                    <motion.div
+                      layoutId="nav-glow"
+                      className="absolute inset-0 bg-cyan-500/10 rounded-lg -z-0"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </button>
+              </li>
+            ))}
           </ul>
 
-          {/* RIGHT */}
+          {/* Action Buttons */}
           <div className="flex items-center gap-3">
+            <button className="hidden sm:flex px-5 py-2 bg-white text-black text-[10px] font-black uppercase rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 flex items-center">
+              Hire Me <ArrowRight></ArrowRight>
+            </button>
 
-            {/* THEME TOGGLE */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setDarkMode(!darkMode)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg dark:border-white/10 dark:bg-white/5"
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={darkMode ? "moon" : "sun"}
-                  initial={{ rotate: -180, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 180, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {darkMode ? (
-                    <Moon className="h-5 w-5 text-cyan-400" />
-                  ) : (
-                    <Sun className="h-5 w-5 text-yellow-500" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </motion.button>
-
-            {/* MOBILE MENU BUTTON */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg dark:border-white/10 dark:bg-white/5 lg:hidden"
+              className="lg:hidden p-2 text-white bg-white/10 rounded-full"
             >
-              {menuOpen ? (
-                <X className="h-5 w-5 text-black dark:text-white" />
-              ) : (
-                <Menu className="h-5 w-5 text-black dark:text-white" />
-              )}
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
       {/* MOBILE MENU */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -30 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.25 }}
-            className="fixed left-1/2 top-20 z-40 w-[92%] max-w-md -translate-x-1/2 rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-[#0f172a]/90 lg:hidden"
+            exit={{ opacity: 0, y: -20 }}
+            className="lg:hidden absolute top-full left-6 right-6 mt-4 p-4 bg-slate-900/95 border border-white/10 backdrop-blur-2xl rounded-3xl shadow-2xl"
           >
             <div className="flex flex-col gap-2">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleScrollTo(item.id)}
-                    className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium capitalize transition-all duration-300 ${
-                      active === item.id
-                        ? "border border-cyan-400/40 bg-cyan-400/10 text-cyan-500"
-                        : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/5"
-                    }`}
-                  >
-                    <Icon className="h-5 w-5" />
-                    {item.id}
-                  </button>
-                );
-              })}
+              {menuItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleScrollTo(item.id)}
+                  className={`flex items-center justify-between px-6 py-4 rounded-2xl transition-all ${
+                    active === item.id
+                      ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30"
+                      : "text-slate-400 hover:bg-white/5"
+                  }`}
+                >
+                  <span className="font-bold uppercase text-xs tracking-widest">
+                    {item.label}
+                  </span>
+                  <item.icon size={16} />
+                </button>
+              ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }

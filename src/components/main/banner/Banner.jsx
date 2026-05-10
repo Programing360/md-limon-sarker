@@ -346,137 +346,103 @@ export function Banner() {
         {/* RIGHT IMAGE */}
         {/* ========================= */}
 
-        <motion.div
-          ref={imageRef}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="relative flex items-center justify-center"
-        >
+        {/* ========================= */}
+{/* RIGHT IMAGE (Updated Design) */}
+{/* ========================= */}
 
-          {/* MAIN GLOW */}
+<motion.div
+  ref={imageRef}
+  initial={{ opacity: 0, x: 20 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 1.2, ease: "expo.out" }}
+  className="relative flex items-center justify-center lg:flex-1"
+>
+  {/* RADIANT BACKGROUND GLOW */}
+  <div className="absolute h-[450px] w-[450px] rounded-full bg-cyan-500/10 blur-[100px] animate-pulse" />
+  <div className="absolute h-[300px] w-[300px] rounded-full bg-indigo-600/20 blur-[80px] delay-700" />
 
-          <div className="absolute h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[120px]" />
+  {/* DYNAMIC TECH ORBIT */}
+  <motion.div
+    animate={{ rotate: 360 }}
+    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+    className="absolute h-[500px] w-[500px] rounded-[60px] border border-cyan-400/10 border-dashed"
+  />
 
-          {/* ROTATING CIRCLE */}
+  <div className="relative group">
+    
+    {/* FLOATING DECO: CODE SNIPPET CARD */}
+    <motion.div
+      animate={{ y: [0, -20, 0], rotate: [-5, -2, -5] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -left-16 top-10 z-30 hidden xl:block"
+    >
+      <div className="rounded-2xl border border-white/10 bg-[#020817]/80 p-4 backdrop-blur-2xl shadow-2xl">
+        <div className="flex gap-1.5 mb-2">
+          <div className="h-2 w-2 rounded-full bg-red-500" />
+          <div className="h-2 w-2 rounded-full bg-yellow-500" />
+          <div className="h-2 w-2 rounded-full bg-green-500" />
+        </div>
+        <code className="text-[10px] text-cyan-400 font-mono">
+          const dev = "MD Limon"; <br/>
+          status: "Coding...";
+        </code>
+      </div>
+    </motion.div>
 
-          <motion.div
-            animate={{
-              rotate: 360,
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute h-[520px] w-[520px] rounded-full border border-cyan-400/20 border-dashed"
-          />
+    {/* MAIN IMAGE CONTAINER WITH GLASSMORPHISM FRAME */}
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="relative z-20 overflow-hidden"
+      style={{
+        clipPath: "polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)", // Unique Slanted Shape
+      }}
+    >
+      {/* GLOSSY OVERLAY */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-tr from-cyan-500/10 via-transparent to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <img
+        src={limonImage}
+        alt="MD Limon"
+        className="h-[450px] w-[320px] object-cover sm:h-[550px] sm:w-[380px] lg:h-[600px] lg:w-[420px] transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
+      />
 
-          {/* FLOATING CARD 1 */}
+      {/* INNER BORDER GRADIENT */}
+      <div className="absolute inset-0 border-[8px] border-white/5 pointer-events-none" />
+    </motion.div>
 
-          <motion.div
-            animate={{
-              y: [0, -15, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -left-20 top-16 hidden lg:block"
-          >
-            <div className="w-[220px] rotate-[-12deg] rounded-3xl border border-white/10 bg-white/5 p-3 backdrop-blur-xl shadow-2xl">
-              <img
-                src="https://i.ibb.co.com/8L5M6Y8/dashboard.jpg"
-                alt=""
-                className="rounded-2xl"
-              />
-            </div>
-          </motion.div>
+    {/* ACCENT SHAPE BEHIND IMAGE */}
+    <div className="absolute -bottom-6 -right-6 -z-10 h-full w-full bg-gradient-to-br from-cyan-500 to-blue-600 opacity-20 rounded-[40px] blur-2xl group-hover:opacity-40 transition-opacity" />
 
-          {/* FLOATING CARD 2 */}
+    {/* FLOATING STATUS BADGE */}
+    <motion.div
+      animate={{ x: [0, 10, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -right-8 bottom-20 z-30 flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-6 py-3 backdrop-blur-3xl shadow-xl"
+    >
+      <div className="relative flex h-3 w-3">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+      </div>
+      <span className="text-xs font-bold tracking-widest text-white uppercase">Open to Work</span>
+    </motion.div>
 
-          <motion.div
-            animate={{
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -right-20 bottom-16 hidden lg:block"
-          >
-            <div className="w-[220px] rotate-[12deg] rounded-3xl border border-white/10 bg-white/5 p-3 backdrop-blur-xl shadow-2xl">
-              <img
-                src="https://i.ibb.co.com/0Jmshvb/portfolio.jpg"
-                alt=""
-                className="rounded-2xl"
-              />
-            </div>
-          </motion.div>
+  </div>
 
-          {/* MAIN IMAGE */}
-
-          <motion.div
-            animate={{
-              y: [0, -20, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="group relative"
-          >
-
-            {/* GRADIENT BORDER */}
-
-            <div className="absolute -inset-[3px] rounded-[40px] bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 opacity-70 blur-sm transition duration-500 group-hover:opacity-100" />
-
-            <img
-              src={limonImage}
-              alt="Fardhan Hasan Limon"
-              className="relative z-10 h-[420px] w-[300px] rounded-[40px] border border-white/10 object-cover shadow-2xl transition-all duration-700 group-hover:scale-[1.02] sm:h-[500px] sm:w-[360px] lg:h-[620px] lg:w-[430px]"
-            />
-
-            {/* OVERLAY */}
-
-            <div className="absolute inset-0 rounded-[40px] bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-
-          </motion.div>
-
-          {/* FLOATING BADGE */}
-
-          <motion.div
-            animate={{
-              y: [0, -10, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-            }}
-            className="absolute left-0 top-7 hidden rounded-2xl border border-white/10 bg-white/10 px-5 py-2 backdrop-blur-xl lg:flex items-center"
-          >
-            <span><img className="w-10" src="https://skillicons.dev/icons?i=nextjs" alt="" /></span> <span>Next.js Developer</span>
-          </motion.div>
-
-          {/* FLOATING BADGE */}
-
-          <motion.div
-            animate={{
-              y: [0, 10, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-            }}
-            className="absolute bottom-10 right-0 hidden rounded-2xl border border-white/10 bg-white/10 px-5 py-3 backdrop-blur-xl lg:flex"
-          >
-            🚀 MERN Stack
-          </motion.div>
-
-        </motion.div>
+  {/* TECH STACK ICONS CIRCLE */}
+  <div className="absolute -bottom-10 flex gap-4">
+    {["mongodb", "express", "react", "nodejs"].map((tech, idx) => (
+      <motion.div
+        key={idx}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 10 }}
+        transition={{ delay: 1 + (idx * 0.1) }}
+        className="h-12 w-12 rounded-xl border border-white/10 bg-white/5 p-2.5 backdrop-blur-lg hover:border-cyan-400/50 transition-colors"
+      >
+        <img src={`https://skillicons.dev/icons?i=${tech}`} alt={tech} />
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
       </div>
     </section>
   );
