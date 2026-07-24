@@ -75,6 +75,13 @@ export default function Navbar() {
     }
   };
 
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
@@ -173,7 +180,9 @@ export default function Navbar() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
-            <button className="hidden sm:flex px-5 py-2 bg-white text-black text-[10px] font-black uppercase rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 flex items-center">
+            <button
+              onClick={() => scrollToSection("contact")}
+            className="hidden sm:flex px-5 py-2 bg-white text-black text-[10px] font-black uppercase rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 flex items-center">
               Hire Me <ArrowRight></ArrowRight>
             </button>
 

@@ -1,117 +1,121 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, ExternalLink, Calendar, Award } from "lucide-react";
-
-const ExperienceCard = ({ exp, index }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="relative pl-8 pb-12 last:pb-0 group"
-    >
-      {/* Vertical Timeline Line */}
-      <div className="absolute left-0 top-0 h-full w-[2px] bg-slate-800 group-last:h-1/2">
-        <div className="absolute top-0 left-0 w-full h-0 bg-gradient-to-b from-blue-500 to-cyan-400 group-hover:h-full transition-all duration-1000" />
-      </div>
-
-      {/* Timeline Dot */}
-      <div className="absolute left-[-6px] top-0 h-3 w-3 rounded-full bg-slate-800 border-2 border-slate-700 group-hover:border-blue-500 group-hover:scale-125 transition-all duration-300 z-10" />
-
-      <div className="bg-[#0a1428]/50 border border-white/5 p-6 rounded-2xl hover:border-blue-500/30 hover:bg-[#0a1428] transition-all duration-300 shadow-xl relative overflow-hidden">
-        {/* Decorative Background Icon */}
-        <div className="absolute -right-4 -bottom-4 text-white/[0.02] group-hover:text-blue-500/[0.05] transition-colors">
-          {exp.type === "work" ? <Briefcase size={120} /> : <GraduationCap size={120} />}
-        </div>
-
-        <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
-          <div>
-            <div className="flex items-center gap-2 text-blue-400 font-mono text-xs uppercase tracking-widest mb-1">
-              <Calendar size={12} />
-              {exp.duration}
-            </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
-              {exp.title}
-            </h3>
-            <p className="text-slate-400 font-medium flex items-center gap-2">
-              {exp.company}
-              <span className="h-1 w-1 rounded-full bg-slate-600" />
-              <span className="text-xs text-slate-500">{exp.location || "Remote"}</span>
-            </p>
-          </div>
-          
-          {/* Tag for Non-CSE background strength */}
-          <div className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-bold text-blue-400 uppercase tracking-tighter">
-            {exp.type === "work" ? "Professional" : "Academic"}
-          </div>
-        </div>
-
-        <p className="text-slate-400 leading-relaxed text-sm relative z-10">
-          {exp.description}
-        </p>
-
-        {exp.skills && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {exp.skills.map((skill, sIndex) => (
-              <span key={sIndex} className="text-[10px] font-medium px-2 py-1 bg-slate-800/50 text-slate-300 rounded-md border border-white/5">
-                {skill}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    </motion.div>
-  );
-};
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { Briefcase, Calendar, Building2, Code, Server, Database, Globe } from 'lucide-react';
 
 const ExperienceSection = () => {
-  const experiences = [
-    {
-      type: "work",
-      title: "Full-Stack Web Developer",
-      company: "Your Current/Recent Role",
-      duration: "2024 - Present",
-      location: "Dhaka, BD",
-      description: "Developing modern web applications using MERN stack. Focused on creating seamless user experiences and scalable backend architectures. Implementing high-performance UI components with Next.js.",
-      skills: ["React", "Next.js", "Node.js", "Tailwind CSS"]
-    },
-    {
-      type: "work",
-      title: "Web Developer & Educator",
-      company: "Limon English Care",
-      duration: "2023 - 2024",
-      location: "Hybrid",
-      description: "Managed digital branding and technical infrastructure. Simultaneously led English language training programs, demonstrating strong communication and leadership skills—essential for collaborative dev environments.",
-      skills: ["Digital Branding", "Leadership", "Web Management"]
-    },
-    {
-      type: "edu",
-      title: "Bachelor of Arts / Science", // Apnar real degree ekhane din
-      company: "Your University Name",
-      duration: "2020 - 2024",
-      location: "Bangladesh",
-      description: "Transitioned from a non-technical background to full-stack development through intensive self-study and professional bootcamps. Focused on logic building and problem-solving.",
-      skills: ["Problem Solving", "Critical Thinking"]
-    }
-  ];
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   return (
-    <div className="lg:col-span-8">
-      <div className="mb-10">
-        <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-          <Award className="text-blue-500" />
-          Professional <span className="text-blue-500">Timeline</span>
+    <section className="bg-[#030712] text-white py-16 px-4 sm:px-6 lg:px-8 font-sans">
+      
+      {/* Section Header */}
+      <div className="text-center mb-16" data-aos="fade-down">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/20 text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-4 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+          <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
+          <span>Professional Journey</span>
+        </div>
+        
+        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white uppercase">
+          WORK <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">EXPERIENCE</span>
         </h2>
-        <p className="text-slate-500 mt-2">A record of my professional growth and academic journey.</p>
+        
+        <div className="w-20 h-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto mt-4 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
       </div>
 
-      <div className="relative">
-        {experiences.map((exp, i) => (
-          <ExperienceCard key={i} exp={exp} index={i} />
-        ))}
+      {/* Timeline Container */}
+      <div className="max-w-3xl mx-auto relative">
+        
+        {/* Left Vertical Timeline Line */}
+        <div className="absolute left-4 sm:left-6 top-3 bottom-3 w-0.5 bg-cyan-900/40"></div>
+
+        {/* Experience Card Item */}
+        <div className="relative pl-12 sm:pl-16 group" data-aos="fade-up">
+          
+          {/* Timeline Dot Node */}
+          <div className="absolute left-4 sm:left-6 top-5 -translate-x-1/2 w-5 h-5 rounded-full border-2 border-cyan-400 bg-[#030712] flex items-center justify-center group-hover:scale-125 transition-all duration-300 shadow-[0_0_12px_rgba(6,182,212,0.6)]">
+            <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
+          </div>
+
+          {/* Main Card Content */}
+          <div className="bg-[#090d16]/90 backdrop-blur-md border border-cyan-900/40 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]">
+            
+            {/* Top Row: Title & Status Badge */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div className="flex items-center gap-3.5">
+                <div className="p-3 bg-cyan-950/60 rounded-xl border border-cyan-800/40 text-cyan-400 shadow-inner">
+                  <Building2 className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+                    MERN Stack Developer <span className="text-cyan-400 font-normal text-base">(Intern)</span>
+                  </h3>
+                  <p className="text-cyan-400/90 font-medium text-sm sm:text-base">
+                    CodeOnix <span className="text-slate-400 text-xs font-normal ml-2">| Software Company</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <span className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium tracking-wide shadow-sm">
+                <Calendar className="w-3 h-3 text-cyan-400" />
+                PRESENT / ONGOING
+              </span>
+            </div>
+
+            {/* Description */}
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-5">
+              Working as a MERN Stack Developer Intern at CodeOnix, focusing on developing full-stack web applications, writing clean and scalable JavaScript/React code, and implementing modern UI/UX components.
+            </p>
+
+            {/* Core Responsibilities Box */}
+            <div className="bg-cyan-950/20 border border-cyan-800/30 rounded-xl p-4 mb-6 space-y-2">
+              <div className="flex items-center gap-2 text-cyan-300 font-semibold text-xs uppercase tracking-wider mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                Key Focus Areas & Responsibilities
+              </div>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-slate-300">
+                <li className="flex items-center gap-2">
+                  <Code className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>React.js & Modern UI Architecture</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Server className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Node.js & Express.js API Development</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Database className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>MongoDB Database Management</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Cross-functional Team Collaboration</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div className="flex flex-wrap gap-2 pt-3 border-t border-cyan-900/30">
+              {["React.js", "JavaScript (ES6+)", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Git"].map((tech, idx) => (
+                <span 
+                  key={idx}
+                  className="text-xs px-3 py-1 rounded-md bg-slate-900/80 text-cyan-300/90 border border-cyan-900/40 font-mono tracking-tight"
+                >
+                  #{tech}
+                </span>
+              ))}
+            </div>
+
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 

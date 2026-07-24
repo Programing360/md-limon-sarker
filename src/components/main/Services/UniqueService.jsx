@@ -24,7 +24,7 @@ const skillStats = [
 const stats = [
   { label: "Projects Completed", value: "40+" },
   { label: "Happy Clients", value: "15+" },
-  { label: "Years Experience", value: "2+" },
+  { label: "Years Experience", value: "1+" },
   { label: "Code Commits", value: "1.2k" },
 ];
 
@@ -113,10 +113,10 @@ const UniqueServices = () => {
               Start a Conversation <MessageSquare size={18} />
             </button>
             <div className="flex gap-2">
-               <a href="#" className="p-4 bg-white/5 rounded-full hover:bg-white/10 transition-all border border-white/10">
+               <a href="https://github.com/Programing360" className="p-4 bg-white/5 rounded-full hover:bg-white/10 transition-all border border-white/10">
                  <BsGithub size={20} />
                </a>
-               <a href="#" className="p-4 bg-white/5 rounded-full hover:bg-white/10 transition-all border border-white/10">
+               <a href="https://www.linkedin.com/in/fardhan-hasan-limon" className="p-4 bg-white/5 rounded-full hover:bg-white/10 transition-all border border-white/10">
                  <FaLinkedin size={20} />
                </a>
             </div>

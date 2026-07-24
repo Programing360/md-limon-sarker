@@ -11,6 +11,7 @@ import Education from "../components/main/Education/Education";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop ";
 import ContactInfo from "../components/main/contract/ContactInfo";
 import UniqueServices from "../components/main/Services/UniqueService";
+import ExperienceSection from "../components/main/Services/ExperienceSection";
 
 const Root = () => {
   return (
@@ -50,6 +51,9 @@ const Root = () => {
 
           <section className="relative">
              <SkillsData />
+          </section>
+          <section className="relative">
+             <ExperienceSection />
           </section>
 
           <section className="relative">
