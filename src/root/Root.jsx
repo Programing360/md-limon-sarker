@@ -12,12 +12,12 @@ import ScrollToTop from "../components/ScrollToTop/ScrollToTop ";
 import ContactInfo from "../components/main/contract/ContactInfo";
 import UniqueServices from "../components/main/Services/UniqueService";
 import ExperienceSection from "../components/main/Services/ExperienceSection";
+import TechnologyIcon from "../components/main/technologyIcon/TechnologyIcon";
 
 const Root = () => {
   return (
     // MAIN WRAPPER WITH DARK THEME
     <div className="relative min-h-screen w-full bg-[#020617] selection:bg-cyan-500/30 selection:text-cyan-400">
-      
       {/* --------------------------------------------------------- */}
       {/* GLOBAL BACKGROUND ELEMENTS (Banner er style er sathe match kore) */}
       {/* --------------------------------------------------------- */}
@@ -37,46 +37,44 @@ const Root = () => {
       <div className="relative z-10">
         <ScrollToTop />
         <Navbar />
-        
+
         {/* Banner full width thake */}
         <Banner />
 
         {/* Baaki section gulo container er bhetore */}
         <div className="container mx-auto px-4 md:w-10/12 lg:w-9/12 xl:w-8/12 space-y-24 md:space-y-32 py-20">
-          
+          <TechnologyIcon></TechnologyIcon>
+
+          <section className="relative">
+            <ExperienceSection />
+          </section>
           {/* Section Divider Style - Optional */}
+          <section className="relative">
+            <Projects />
+          </section>
+
+          <section className="relative">
+            <SkillsData />
+          </section>
+
+          <section className="relative">
+            <Education />
+          </section>
+
+          <section className="relative">
+            <Services />
+          </section>
+
+          <section className="relative">
+            <UniqueServices />
+          </section>
           <section className="relative overflow-visible">
-             <About />
+            <About />
           </section>
-
-          <section className="relative">
-             <SkillsData />
-          </section>
-          <section className="relative">
-             <ExperienceSection />
-          </section>
-
-          <section className="relative">
-             <Education />
-          </section>
-
-          <section className="relative">
-             <Services />
-          </section>
-
-          <section className="relative">
-             <UniqueServices />
-          </section>
-
-          <section className="relative">
-             <Projects />
-          </section>
-
           <div className="">
-             <ContactInfo />
+            <ContactInfo />
           </div>
-             <Contact />
-
+          <Contact />
         </div>
 
         <Footer />

@@ -300,7 +300,8 @@ export function Banner() {
             {/* RESUME DOWNLOAD BUTTON */}
 
             <a
-              href="https://drive.google.com/file/d/14AWHBd90qnMi6cVYox9BjXXFhYRAAzOk/view?usp=drivesdk"
+              href="https://drive.google.com/uc?export=download&id=14AWHBd90qnMi6cVYox9BjXXFhYRAAzOk"
+              download="MD_Limon_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center justify-center gap-2 rounded-2xl border border-slate-300/20 bg-white/5 px-8 py-4 font-semibold text-slate-300 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:text-cyan-400"

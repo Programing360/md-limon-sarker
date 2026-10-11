@@ -14,10 +14,10 @@ import { FaLinkedin } from "react-icons/fa";
 
 // নতুন ডেটা: টেকনিক্যাল স্কিলস (পারসেন্টেজ সহ)
 const skillStats = [
-  { name: "Frontend (React/Next.js)", level: 90 },
-  { name: "Backend (Node/Express)", level: 85 },
-  { name: "Database (MongoDB/SQL)", level: 80 },
-  { name: "UI/UX (Figma)", level: 75 },
+  { name: "Frontend (React/Next.js)", level: 95 },
+  { name: "Backend (Node/Express)", level: 95 },
+  { name: "Database (MongoDB/SQL)", level: 90 },
+  { name: "UI/UX (Figma)", level: 95 },
 ];
 
 // নতুন ডেটা: ছোট অ্যাচিভমেন্টস/কাউন্টার

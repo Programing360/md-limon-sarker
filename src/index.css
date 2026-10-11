@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Text:wght@200..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Text:wght@200..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import "tailwindcss";
- @plugin "daisyui" {
-   themes: light --default, dark --prefersdark;
- }
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+}
 
-
-
-
-#root{
+#root {
   font-family: "Stack Sans Text", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -35,19 +34,57 @@
 
 /* text rotate animation */
 @keyframes rotateText {
-  0%, 20% { transform: translateY(0); }
-  25%, 45% { transform: translateY(-70px); }
-  50%, 70% { transform: translateY(-140px); }
-  75%, 95% { transform: translateY(-210px); }
-  100% { transform: translateY(0); }
+  0%,
+  20% {
+    transform: translateY(0);
+  }
+  25%,
+  45% {
+    transform: translateY(-70px);
+  }
+  50%,
+  70% {
+    transform: translateY(-140px);
+  }
+  75%,
+  95% {
+    transform: translateY(-210px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* background animation */
 @keyframes gradientMove {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .animate-gradientMove {
   animation: gradientMove 10s ease infinite;
+}
+
+@keyframes tech-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-marquee {
+  animation: tech-marquee 35s linear infinite;
+  will-change: transform;
+}
+
+.tech-marquee:hover {
+  animation-play-state: paused;
 }

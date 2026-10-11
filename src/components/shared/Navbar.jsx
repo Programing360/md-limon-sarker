@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -53,10 +53,10 @@ export default function Navbar() {
 
   const menuItems = [
     { id: "home", label: "Home", icon: Home },
-    { id: "about", label: "About", icon: User },
+    { id: "projects", label: "Projects", icon: FolderKanban },
     { id: "skills", label: "Skills", icon: Code2 },
     { id: "services", label: "Services", icon: Briefcase },
-    { id: "projects", label: "Projects", icon: FolderKanban },
+    { id: "about", label: "About", icon: User },
     { id: "contact", label: "Contact", icon: Mail },
   ];
 
@@ -182,7 +182,8 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => scrollToSection("contact")}
-            className="hidden sm:flex px-5 py-2 bg-white text-black text-[10px] font-black uppercase rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 flex items-center">
+              className="hidden sm:flex px-5 py-2 bg-white text-black text-[10px] font-black uppercase rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 flex items-center"
+            >
               Hire Me <ArrowRight></ArrowRight>
             </button>
 

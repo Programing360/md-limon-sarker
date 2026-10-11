@@ -1,7 +1,16 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { Briefcase, Calendar, Building2, Code, Server, Database, Globe } from 'lucide-react';
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import {
+  Briefcase,
+  Calendar,
+  Building2,
+  Code,
+  Server,
+  Database,
+  Globe,
+} from "lucide-react";
+import { Link } from "react-router";
 
 const ExperienceSection = () => {
   useEffect(() => {
@@ -13,30 +22,30 @@ const ExperienceSection = () => {
 
   return (
     <section className="bg-[#030712] text-white py-16 px-4 sm:px-6 lg:px-8 font-sans">
-      
       {/* Section Header */}
       <div className="text-center mb-16" data-aos="fade-down">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/20 text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-4 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
           <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
           <span>Professional Journey</span>
         </div>
-        
+
         <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white uppercase">
-          WORK <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">EXPERIENCE</span>
+          WORK{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
+            EXPERIENCE
+          </span>
         </h2>
-        
+
         <div className="w-20 h-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto mt-4 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
       </div>
 
       {/* Timeline Container */}
       <div className="max-w-3xl mx-auto relative">
-        
         {/* Left Vertical Timeline Line */}
         <div className="absolute left-4 sm:left-6 top-3 bottom-3 w-0.5 bg-cyan-900/40"></div>
 
         {/* Experience Card Item */}
         <div className="relative pl-12 sm:pl-16 group" data-aos="fade-up">
-          
           {/* Timeline Dot Node */}
           <div className="absolute left-4 sm:left-6 top-5 -translate-x-1/2 w-5 h-5 rounded-full border-2 border-cyan-400 bg-[#030712] flex items-center justify-center group-hover:scale-125 transition-all duration-300 shadow-[0_0_12px_rgba(6,182,212,0.6)]">
             <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
@@ -44,7 +53,6 @@ const ExperienceSection = () => {
 
           {/* Main Card Content */}
           <div className="bg-[#090d16]/90 backdrop-blur-md border border-cyan-900/40 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]">
-            
             {/* Top Row: Title & Status Badge */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3.5">
@@ -53,10 +61,16 @@ const ExperienceSection = () => {
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
-                    MERN Stack Developer <span className="text-cyan-400 font-normal text-base">(Intern)</span>
+                    MERN Stack Developer{" "}
+                    <span className="text-cyan-400 font-normal text-base">
+                      (Remote)
+                    </span>
                   </h3>
                   <p className="text-cyan-400/90 font-medium text-sm sm:text-base">
-                    CodeOnix <span className="text-slate-400 text-xs font-normal ml-2">| Software Company</span>
+                    CodeOnix{" "}
+                    <span className="text-slate-400 text-xs font-normal ml-2">
+                      | Software Company
+                    </span>
                   </p>
                 </div>
               </div>
@@ -64,13 +78,15 @@ const ExperienceSection = () => {
               {/* Status Badge */}
               <span className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium tracking-wide shadow-sm">
                 <Calendar className="w-3 h-3 text-cyan-400" />
-                PRESENT / ONGOING
+                June 2026 - Present
               </span>
             </div>
 
             {/* Description */}
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-5">
-              Working as a MERN Stack Developer Intern at CodeOnix, focusing on developing full-stack web applications, writing clean and scalable JavaScript/React code, and implementing modern UI/UX components.
+              Working as a MERN Stack Developer at CodeOnix, focusing on
+              developing full-stack web applications, writing clean and scalable
+              JavaScript/React code, and implementing modern UI/UX components.
             </p>
 
             {/* Core Responsibilities Box */}
@@ -98,11 +114,31 @@ const ExperienceSection = () => {
                 </li>
               </ul>
             </div>
+            <div>
+              <Link
+                to="https://career-prep-frontend-rho.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 font-semibold text-sm border border-cyan-500/30 bg-cyan-950/20 px-4 py-2 rounded-lg shadow-sm hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                  <span className="mr-2">🔗</span>
+                  View Live Project
+                </button>
+              </Link>
+            </div>
 
             {/* Tech Stack Pills */}
             <div className="flex flex-wrap gap-2 pt-3 border-t border-cyan-900/30">
-              {["React.js", "JavaScript (ES6+)", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Git"].map((tech, idx) => (
-                <span 
+              {[
+                "React.js",
+                "JavaScript (ES6+)",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Tailwind CSS",
+                "Git",
+              ].map((tech, idx) => (
+                <span
                   key={idx}
                   className="text-xs px-3 py-1 rounded-md bg-slate-900/80 text-cyan-300/90 border border-cyan-900/40 font-mono tracking-tight"
                 >
@@ -110,10 +146,8 @@ const ExperienceSection = () => {
                 </span>
               ))}
             </div>
-
           </div>
         </div>
-
       </div>
     </section>
   );
