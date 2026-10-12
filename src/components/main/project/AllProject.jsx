@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { projects } from "../../../data/projects";
 import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router";
 
 const AllProject = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -25,6 +26,14 @@ const AllProject = () => {
       once: true,
       offset: 70,
       easing: "ease-out-cubic",
+    });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
     });
   }, []);
 
@@ -111,7 +120,7 @@ const AllProject = () => {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.07] px-4 py-2 text-sm font-medium text-blue-300">
             <Sparkles size={16} />
-            <span>MY CREATIVE WORK</span>
+            <span>All My Projects</span>
           </div>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
@@ -184,7 +193,7 @@ const AllProject = () => {
               key={project.id}
               data-aos="fade-up"
               data-aos-delay={(index % 3) * 100}
-              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0b1120]/80 transition-all duration-500 hover:-translate-y-2  hover:border-blue-400/30 hover:shadow-2xl hover:shadow-blue-950/30 "
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0b1120]/80 transition-all duration-700 ease-in-out   hover:border-blue-400/30 hover:shadow-2xl hover:shadow-blue-950/30 "
             >
               {/* Image */}
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
@@ -192,7 +201,7 @@ const AllProject = () => {
                   src={project.image}
                   alt={`${project.title} project preview`}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-125"
                 />
 
                 {/* Image overlay */}
@@ -226,7 +235,7 @@ const AllProject = () => {
                       {getCategory(project)}
                     </p>
 
-                    <h2 className="text-xl font-bold tracking-tight text-white transition-colors duration-300 group-hover:text-blue-300 sm:text-2xl">
+                    <h2 className="text-xl font-bold tracking-tight font-mono text-white transition-colors duration-300 group-hover:text-blue-300 sm:text-2xl">
                       {project.title}
                     </h2>
                   </div>
@@ -241,7 +250,7 @@ const AllProject = () => {
                   </button>
                 </div>
 
-                <p className="mb-5 text-sm leading-7 text-slate-400">
+                <p className="mb-5 text-sm leading-7 text-slate-400 font-mono">
                   {project.subtitle}
                 </p>
 
@@ -306,6 +315,14 @@ const AllProject = () => {
           ))}
         </div>
 
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+          <Link to={"/"}>
+            <button className="mt-10 inline-flex items-center gap-2 rounded-xl bg-blue-500 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-400 hover:shadow-lg hover:shadow-blue-500/20 ">
+              Return Home
+            </button>
+          </Link>
+        </div>
+
         {/* Empty State */}
         {filteredProjects.length === 0 && (
           <div className="rounded-2xl border border-white/10 bg-white/[0.025] py-16 text-center">
@@ -338,7 +355,7 @@ const AllProject = () => {
           </p>
 
           <a
-            href="mailto:your-email@example.com"
+            href="mailto:fardhanhasanlimon95@gmail.com"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-500 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-400 hover:shadow-lg hover:shadow-blue-500/20"
           >
             Let's Talk

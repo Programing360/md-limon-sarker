@@ -36,7 +36,7 @@ const Root = () => {
       {/* --------------------------------------------------------- */}
       <div className="relative z-10">
         <ScrollToTop />
-        <Navbar />
+        {/* <Navbar /> */}
 
         {/* Banner full width thake */}
         <Banner />

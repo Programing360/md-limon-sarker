@@ -9,12 +9,13 @@ import Lenis from "@studio-freight/lenis";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 import { ArrowRight, Download } from "lucide-react";
 
 import limonImage from "../../../assets/limon.jpg";
 import { Link } from "react-router";
+import { MdEmail } from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,14 +131,27 @@ export function Banner() {
     {
       icon: FaGithub,
       url: "https://github.com/Programing360",
+      bg: "#485464",
     },
     {
       icon: FaLinkedin,
       url: "https://www.linkedin.com/in/fardhan-hasan-limon",
+      bg: "#0077b5",
     },
     {
       icon: FaFacebook,
       url: "https://www.facebook.com/md.limon.280500",
+      bg: "#0f91f3",
+    },
+    {
+      icon: FaWhatsapp,
+      url: "https://wa.me/8801754318654",
+      bg: "#25D366",
+    },
+    {
+      icon: MdEmail,
+      url: "mailto:fardhanhasna@gmail.com",
+      bg: "#fb353c",
     },
   ];
 
@@ -272,11 +286,11 @@ export function Banner() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="mt-8 max-w-2xl text-base leading-8 text-slate-400 md:text-lg"
+            className="mt-8 max-w-2xl text-base leading-8 text-slate-400 md:text-lg font-mono"
           >
-            I design and develop modern, scalable, high-performance web
-            applications with clean UI, smooth user experience, advanced
-            animations, and secure backend architecture.
+            I build intelligent systems that combine AI automation with modern
+            web development — helping businesses automate repetitive operations
+            while creating fast, scalable web applications.
           </motion.p>
 
           {/* BUTTONS */}
@@ -319,7 +333,11 @@ export function Banner() {
                 <motion.button
                   whileHover={{ y: -5, scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
-                  className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-300/20 bg-white/5 text-slate-300 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/40 hover:text-cyan-400"
+                  style={{
+                    backgroundColor:
+                      socialLinks[i].bg || "rgba(255, 255, 255, 0.05)",
+                  }}
+                  className={`flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-300/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/40 cursor-pointer`}
                 >
                   <Icon className="h-5 w-5" />
                 </motion.button>

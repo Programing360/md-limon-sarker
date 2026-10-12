@@ -20,7 +20,7 @@ import {
   Mail,
   ArrowRight,
 } from "lucide-react";
-
+import { Link } from "react-router";
 export default function Navbar() {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,9 +52,9 @@ export default function Navbar() {
   });
 
   const menuItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "projects", label: "Projects", icon: FolderKanban },
-    { id: "skills", label: "Skills", icon: Code2 },
+    { id: "home", label: "Home", icon: Home, link: "/" },
+    { id: "projects", label: "Projects", icon: FolderKanban, link: "/" },
+    { id: "skills", label: "Skills", icon: Code2, link: "/" },
     { id: "services", label: "Services", icon: Briefcase },
     { id: "about", label: "About", icon: User },
     { id: "contact", label: "Contact", icon: Mail },
@@ -137,44 +137,46 @@ export default function Navbar() {
           {/* DESKTOP NAV (Magnetic Active Bar) */}
           <ul className="hidden lg:flex items-center gap-1">
             {menuItems.map((item) => (
-              <li key={item.id} className="relative">
-                <button
-                  onClick={() => handleScrollTo(item.id)}
-                  className={`relative px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
-                    active === item.id
-                      ? "text-cyan-400"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  <span className="relative z-10">{item.label}</span>
+              <Link to={item.link || `#${item.id}`} key={item.id}>
+                <li key={item.id} className="relative">
+                  <button
+                    onClick={() => handleScrollTo(item.id)}
+                    className={`relative px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
+                      active === item.id
+                        ? "text-cyan-400"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <span className="relative z-10">{item.label}</span>
 
-                  {/* SMOOTH ACTIVE BAR (The Magic) */}
-                  {active === item.id && (
-                    <motion.div
-                      layoutId="nav-active-bar"
-                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_#22d3ee]"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
+                    {/* SMOOTH ACTIVE BAR (The Magic) */}
+                    {active === item.id && (
+                      <motion.div
+                        layoutId="nav-active-bar"
+                        className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_#22d3ee]"
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                        }}
+                      />
+                    )}
 
-                  {/* HOVER GLOW EFFECT */}
-                  {active === item.id && (
-                    <motion.div
-                      layoutId="nav-glow"
-                      className="absolute inset-0 bg-cyan-500/10 rounded-lg -z-0"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </button>
-              </li>
+                    {/* HOVER GLOW EFFECT */}
+                    {active === item.id && (
+                      <motion.div
+                        layoutId="nav-glow"
+                        className="absolute inset-0 bg-cyan-500/10 rounded-lg -z-0"
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                  </button>
+                </li>
+              </Link>
             ))}
           </ul>
 

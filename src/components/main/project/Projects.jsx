@@ -374,8 +374,11 @@ export default function BentoProjects() {
           </div>
           <div>
             <Link to="/projects">
-              <button className="px-6 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all text-sm font-bold uppercase tracking-wider">
-                View All Projects
+              <button className="group relative inline-block px-6 py-2.5 rounded-full border border-white/20 text-white transition-all text-sm font-bold uppercase tracking-wider">
+                <span className="absolute inset-0 bg-white/20 group-hover:bg-white rounded-full transition-all duration-150 "></span>
+                <span className="relative z-10 group-hover:text-black font-mono ">
+                  View All Projects
+                </span>
               </button>
             </Link>
           </div>
